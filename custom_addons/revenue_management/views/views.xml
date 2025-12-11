@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+
+<odoo>
+    <record id="view_revenue_tree" model="ir.ui.view">
+        <field name="name">revenue.tree</field>
+        <field name="model">revenue.management</field>
+        <field name="arch" type="xml">
+            <tree string="Revenues">
+                <field name="date"/>
+                <field name="amount"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_revenue_form" model="ir.ui.view">
+        <field name="name">revenue.form</field>
+        <field name="model">revenue.management</field>
+        <field name="arch" type="xml">
+            <form string="Revenue">
+                <sheet>
+                    <group>
+                        <field name="date"/>
+                        <field name="amount"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_revenue" model="ir.actions.act_window">
+        <field name="name">Revenues</field>
+        <field name="res_model">revenue.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_revenue" name="Revenues" action="action_revenue" parent="base.menu_custom"/>
+</odoo>
+

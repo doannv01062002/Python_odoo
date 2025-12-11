@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+
+<odoo>
+    <record id="view_product_tree" model="ir.ui.view">
+        <field name="name">product.tree</field>
+        <field name="model">product.management</field>
+        <field name="arch" type="xml">
+            <tree string="Products">
+                <field name="product_name"/>
+                <field name="product_price"/>
+                <field name="product_quantity"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_product_form" model="ir.ui.view">
+        <field name="name">product.form</field>
+        <field name="model">product.management</field>
+        <field name="arch" type="xml">
+            <form string="Product">
+                <sheet>
+                    <group>
+                        <field name="product_name"/>
+                        <field name="product_price"/>
+                        <field name="product_quantity"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_product" model="ir.actions.act_window">
+        <field name="name">Products</field>
+        <field name="res_model">product.management</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_product" name="Products" action="action_product" parent="base.menu_custom"/>
+</odoo>
+
