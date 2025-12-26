@@ -44,7 +44,7 @@
                 <field name="name"/>
                 <field name="customer_id"/>
                 <field name="address"/>
-                <field name="price"/>
+                <field name="expected_price"/>
             </tree>
         </field>
     </record>
@@ -59,7 +59,8 @@
                         <field name="name"/>
                         <field name="customer_id"/>
                         <field name="address"/>
-                        <field name="price"/>
+                        <field name="expected_price"/>
+                        <field name="selling_price"/>
                     </group>
                 </sheet>
             </form>
