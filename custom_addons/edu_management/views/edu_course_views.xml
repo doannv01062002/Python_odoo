@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Course Search View -->
+    <record id="view_edu_course_search" model="ir.ui.view">
+        <field name="name">edu.course.search</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm Khóa học">
+                <field name="name"/>
+                <field name="responsible_id"/>
+                <filter string="Khóa học đang đóng" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Người phụ trách" name="group_responsible" context="{'group_by': 'responsible_id'}"/>
+                    <filter string="Chuyên ngành" name="group_subject" context="{'group_by': 'subject_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Course Tree View -->
+    <record id="view_edu_course_tree" model="ir.ui.view">
+        <field name="name">edu.course.tree</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <tree string="Danh sách Khóa học">
+                <field name="name"/>
+                <field name="subject_id"/>
+                <field name="responsible_id"/>
+                <field name="active" widget="boolean_toggle"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Course Form View -->
+    <record id="view_edu_course_form" model="ir.ui.view">
+        <field name="name">edu.course.form</field>
+        <field name="model">edu.course</field>
+        <field name="arch" type="xml">
+            <form string="Khóa học">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                         <button name="%(action_edu_session)d"
+                                type="action"
+                                class="oe_stat_button"
+                                icon="fa-calendar"
+                                context="{'default_course_id': active_id, 'search_default_course_id': active_id}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value"><field name="session_count"/></span>
+                                <span class="o_stat_text">Lớp học</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="subject_id"/>
+                        </group>
+                        <group>
+                            <field name="responsible_id"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Thông tin chung">
+                            <field name="description" placeholder="Mô tả chi tiết khóa học..."/>
+                        </page>
+                        <page string="Danh sách lớp">
+                            <field name="session_ids">
+                                <tree string="Lớp học" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="instructor_id"/>
+                                    <field name="start_date"/>
+                                    <field name="seats"/>
+                                    <field name="taken_seats" widget="progressbar"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_edu_course" model="ir.actions.act_window">
+        <field name="name">Khóa học</field>
+        <field name="res_model">edu.course</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo khóa học đầu tiên của bạn!
+            </p>
+        </field>
+    </record>
+</odoo>

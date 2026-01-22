@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 1. Chuyên ngành -->
+        <record id="subject_it" model="edu.subject">
+            <field name="name">Công nghệ thông tin</field>
+            <field name="description">Các khóa học lập trình và hệ thống</field>
+        </record>
+
+        <record id="subject_lang" model="edu.subject">
+            <field name="name">Ngoại ngữ</field>
+            <field name="description">Tiếng Anh, Nhật, Hàn, Trung</field>
+        </record>
+
+        <!-- 2. Giảng viên -->
+        <record id="partner_teacher_1" model="res.partner">
+            <field name="name">Cô Lan Anh</field>
+            <field name="email">lananh@edu.vn</field>
+            <field name="is_instructor">True</field>
+        </record>
+
+        <record id="partner_teacher_2" model="res.partner">
+            <field name="name">Thầy Minh Tuấn</field>
+            <field name="email">tuan.minh@edu.vn</field>
+            <field name="is_instructor">True</field>
+        </record>
+        
+        <!-- 3. Học viên -->
+        <record id="partner_student_1" model="res.partner">
+            <field name="name">Nguyễn Văn An</field>
+            <field name="email">an.nguyen@student.vn</field>
+        </record>
+        
+        <record id="partner_student_2" model="res.partner">
+            <field name="name">Trần Thị Bé</field>
+            <field name="email">be.tran@student.vn</field>
+        </record>
+        
+        <!-- 4. Phòng học -->
+        <record id="room_101" model="edu.classroom">
+            <field name="name">Lab 101 (Máy tính)</field>
+            <field name="capacity">25</field>
+        </record>
+        
+        <record id="room_A2" model="edu.classroom">
+            <field name="name">Phòng A2 (Lý thuyết)</field>
+            <field name="capacity">50</field>
+        </record>
+
+        <!-- 5. Khóa học -->
+        <record id="course_python" model="edu.course">
+            <field name="name">Lập trình Python cơ bản</field>
+            <field name="subject_id" ref="subject_it"/>
+            <field name="description">Khóa học Python cho người mới bắt đầu</field>
+            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="course_english" model="edu.course">
+            <field name="name">Tiếng Anh Giao tiếp Toeic 500</field>
+            <field name="subject_id" ref="subject_lang"/>
+            <field name="responsible_id" ref="base.user_admin"/>
+        </record>
+
+        <!-- 6. Sản phẩm Học phí -->
+        <record id="product_edu_fee_basic" model="product.product">
+            <field name="name">Học phí Cơ bản</field>
+            <field name="list_price">2000000</field>
+            <field name="is_edu_fee">True</field>
+        </record>
+        
+        <!-- 7. Lớp học demo -->
+        <record id="session_demo_1" model="edu.session">
+            <field name="name">Lớp Python K14</field>
+            <field name="course_id" ref="course_python"/>
+            <field name="instructor_id" ref="partner_teacher_2"/>
+            <field name="classroom_id" ref="room_101"/>
+            <field name="start_date" eval="(DateTime.now() + timedelta(days=2)).strftime('%Y-%m-%d')"/>
+            <field name="duration">30</field>
+            <field name="seats">20</field>
+            <field name="product_id" ref="product_edu_fee_basic"/>
+            <field name="attendee_ids" eval="[(6, 0, [ref('partner_student_1'), ref('partner_student_2')])]"/>
+            <field name="state">open</field>
+        </record>
+    </data>
+</odoo>

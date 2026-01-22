@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_edu" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.edu</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" type="action" name="%(action_edu_session)d" 
+                        icon="fa-graduation-cap" 
+                        context="{'search_default_instructor_id': active_id, 'default_instructor_id': active_id}"
+                        invisible="not is_instructor">
+                    <field string="Lớp đang dạy" name="teaching_session_count" widget="statinfo"/>
+                </button>
+            </div>
+            
+            <!-- Add is_instructor checkbox -->
+            <xpath expr="//field[@name='vat']" position="before">
+                <field name="is_instructor"/>
+            </xpath>
+            
+            <!-- Add Education Page -->
+            <notebook position="inside">
+                <page string="Education" name="education_page">
+                    <group>
+                        <group>
+                            <field name="is_instructor"/>
+                        </group>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

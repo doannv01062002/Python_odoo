@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Root Menu -->
+    <menuitem id="menu_edu_root"
+              name="Đào tạo"
+              sequence="10"
+              web_icon="edu_management,static/description/icon.png"/>
+
+    <!-- Course Menu Category -->
+    <menuitem id="menu_edu_course_cat"
+              name="Khóa học"
+              parent="menu_edu_root"
+              sequence="1"/>
+
+    <menuitem id="menu_edu_course_act"
+              name="Danh sách Khóa học"
+              parent="menu_edu_course_cat"
+              action="action_edu_course"
+              sequence="1"/>
+
+    <menuitem id="menu_edu_session_act"
+              name="Danh sách Lớp học"
+              parent="menu_edu_course_cat"
+              action="action_edu_session"
+              sequence="2"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_edu_config"
+              name="Cấu hình"
+              parent="menu_edu_root"
+              sequence="100"/>
+
+    <!-- Subject Action (inline) -->
+    <record id="action_edu_subject" model="ir.actions.act_window">
+        <field name="name">Môn học / Chuyên ngành</field>
+        <field name="res_model">edu.subject</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_edu_subject_act"
+              name="Chuyên ngành"
+              parent="menu_edu_config"
+              action="action_edu_subject"
+              sequence="1"/>
+
+    <menuitem id="menu_edu_classroom_act"
+              name="Phòng học"
+              parent="menu_edu_config"
+              action="action_edu_classroom"
+              sequence="2"/>
+
+    <!-- Fee Product Action -->
+    <record id="action_edu_fee" model="ir.actions.act_window">
+        <field name="name">Học phí</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('is_edu_fee', '=', True)]</field>
+        <field name="context">{'default_is_edu_fee': True}</field>
+    </record>
+
+    <menuitem id="menu_edu_fee_act"
+              name="Học phí"
+              parent="menu_edu_config"
+              action="action_edu_fee"
+              sequence="3"/>
+</odoo>

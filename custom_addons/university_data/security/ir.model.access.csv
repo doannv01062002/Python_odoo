@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_university_course,university.course,model_university_course,base.group_user,1,1,1,1
-access_university_student,university.student,model_university_student,base.group_user,1,1,1,1
-
